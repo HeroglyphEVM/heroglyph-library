@@ -1,0 +1,18 @@
+.idea
+.vscode
+lcov.info
+
+broadcast/
+cache/
+out/
+
+.env
+
+node_modules
+coverage
+coverage.json
+
+# Added by cargo
+/target
+
+.VSCodeCounter
