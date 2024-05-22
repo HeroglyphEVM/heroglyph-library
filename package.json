@@ -1,0 +1,16 @@
+{
+  "name": "heroglyph-library",
+  "version": "1.0.0",
+  "description": "Library to easily create a TickerOperator on Heroglyph",
+  "homepage": "https://heroglyphs.com/",
+  "bugs": "https://github.com/HeroglyphEVM/heroglyph-library/issues",
+  "license": "(Apache-2.0 OR MIT)",
+  "author": "0xAtum",
+  "files": [
+    "src/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HeroglyphEVM/heroglyph-library.git"
+  }
+}
