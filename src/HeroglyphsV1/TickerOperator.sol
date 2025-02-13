@@ -2,7 +2,7 @@
 pragma solidity ^0.8.25;
 
 import { ITickerOperator } from "./ITickerOperator.sol";
-import { IGasPool } from "./IGasPool.sol";
+import { IGasPool } from "../IGasPool.sol";
 
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
