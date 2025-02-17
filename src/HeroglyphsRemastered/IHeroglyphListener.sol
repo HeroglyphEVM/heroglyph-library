@@ -69,7 +69,6 @@ interface IHeroglyphListener {
      *  "name": "Listener Name",
      *  "description": "Contract Description",
      *  "website": "Contract Website",
-     *  "deployer": "Deployer Address",
      *  "reservedTickerId": "Reserved Ticker Id -- If only a specific ticker works with this contract",
      *  "isSetupNeeded": "Is Setup is needed from the validator before using the contract"
      * }

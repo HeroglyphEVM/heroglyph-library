@@ -14,7 +14,6 @@ import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
     address public heroglyphRelay;
     address private feePayer;
-    address private deployer;
 
     modifier onlyRelay() {
         require(msg.sender == address(heroglyphRelay), NotHeroglyph());
@@ -26,7 +25,6 @@ abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
 
         feePayer = _feePayer;
         heroglyphRelay = _heroglyphRelay;
-        deployer = msg.sender;
     }
 
     /**
@@ -88,7 +86,6 @@ abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
             _jsonProp("name", getName()),
             _jsonProp("description", getDescription()),
             _jsonProp("website", getWebsite()),
-            _jsonProp("deployer", Strings.toHexString(deployer)),
             _jsonProp("reservedTickerId", Strings.toString(getReservedTicker())),
             _jsonProp("isSetupNeeded", isSetupNeeded() ? "true" : "false", true),
             "}"
