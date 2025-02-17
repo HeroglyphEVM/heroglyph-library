@@ -4,6 +4,7 @@ pragma solidity >= 0.8.28;
 import { IHeroglyphListener } from "./IHeroglyphListener.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 import { IGasPool } from "../IGasPool.sol";
+import { Strings } from "@openzeppelin/contracts/utils/Strings.sol";
 
 /**
  * @title TickerOperator
@@ -13,6 +14,7 @@ import { IGasPool } from "../IGasPool.sol";
 abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
     address public heroglyphRelay;
     address private feePayer;
+    address private deployer;
 
     modifier onlyRelay() {
         require(msg.sender == address(heroglyphRelay), NotHeroglyph());
@@ -24,6 +26,7 @@ abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
 
         feePayer = _feePayer;
         heroglyphRelay = _heroglyphRelay;
+        deployer = msg.sender;
     }
 
     /**
@@ -67,6 +70,37 @@ abstract contract HeroglyphListener is IHeroglyphListener, Ownable {
 
     function getFeePayer() public view virtual returns (address) {
         return feePayer;
+    }
+
+    function getName() public view virtual override returns (string memory name_);
+
+    function getDescription() public view virtual override returns (string memory description_);
+
+    function getWebsite() public view virtual override returns (string memory website_);
+
+    function isSetupNeeded() public view virtual override returns (bool isSetupNeeded_);
+
+    function getReservedTicker() public view virtual override returns (uint256 tickerId_);
+
+    function getListenerInfo() public view override returns (string memory json_) {
+        json_ = string.concat(
+            "{",
+            _jsonProp("name", getName()),
+            _jsonProp("description", getDescription()),
+            _jsonProp("website", getWebsite()),
+            _jsonProp("deployer", Strings.toHexString(deployer)),
+            _jsonProp("reservedTickerId", Strings.toString(getReservedTicker())),
+            _jsonProp("isSetupNeeded", isSetupNeeded() ? "true" : "false", true),
+            "}"
+        );
+    }
+
+    function _jsonProp(string memory key, string memory value) private pure returns (string memory) {
+        return _jsonProp(key, value, false);
+    }
+
+    function _jsonProp(string memory key, string memory value, bool isLast) private pure returns (string memory) {
+        return string.concat('"', key, '": "', value, '"', isLast ? "" : ",");
     }
 
     receive() external payable virtual { }
