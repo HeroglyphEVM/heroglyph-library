@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "../base/BaseTest.t.sol";
-import { TickerOperator, ITickerOperator } from "src/TickerOperator.sol";
+import { TickerOperator, ITickerOperator } from "src/HeroglyphsV1/TickerOperator.sol";
 import { IGasPool } from "src/IGasPool.sol";
 
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
